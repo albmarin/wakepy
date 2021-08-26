@@ -1,4 +1,5 @@
 import subprocess
+import warnings
 
 COMMAND = u"systemctl"
 ARGS = [u"sleep.target", u"suspend.target", u"hibernate.target", u"hybrid-sleep.target"]
@@ -9,9 +10,7 @@ try:
 except subprocess.CalledProcessError:
     # if 'pidof' does not find a process it will return with non-zero exit status, check_output will raise subprocess.CalledProcessError
     # See: https://github.com/np-8/wakepy/pull/3
-    raise NotImplementedError(
-        "wakepy has not yet support for init processes other than systemd. Pull requests welcome: https://github.com/np-8/wakepy"
-    )
+    warnings.warn("wakepy has not yet support for init processes other than systemd. Pull requests welcome: https://github.com/np-8/wakepy")
 
 
 def set_keepawake(keep_screen_awake=False):
