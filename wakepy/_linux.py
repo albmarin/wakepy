@@ -8,9 +8,13 @@ ARGS = [u"sleep.target", u"suspend.target", u"hibernate.target", u"hybrid-sleep.
 try:
     subprocess.check_output(["pidof", "systemd"])
 except subprocess.CalledProcessError:
-    # if 'pidof' does not find a process it will return with non-zero exit status, check_output will raise subprocess.CalledProcessError
+    # if 'pidof' does not find a process it will return with non-zero exit status,
+    # check_output will raise subprocess.CalledProcessError
     # See: https://github.com/np-8/wakepy/pull/3
-    warnings.warn("wakepy has not yet support for init processes other than systemd. Pull requests welcome: https://github.com/np-8/wakepy")
+    warnings.warn(
+        "WakePy does not yet have support for init processes other than systemd. "
+        "Pull requests welcome: https://github.com/np-8/wakepy"
+    )
 
 
 def set_keepawake(keep_screen_awake=False):
@@ -23,8 +27,8 @@ def set_keepawake(keep_screen_awake=False):
     keep_screen_awake: bool
         Currently unused as the screen will remain active as a byproduct of preventing sleep.
     """
-    subprocess.run([COMMAND, u"mask", *ARGS])
+    subprocess.run([COMMAND, u"mask", *ARGS], stdout=subprocess.DEVNULL)
 
 
 def unset_keepawake():
-    subprocess.run([COMMAND, u"unmask", *ARGS])
+    subprocess.run([COMMAND, u"unmask", *ARGS], stdout=subprocess.DEVNULL)
