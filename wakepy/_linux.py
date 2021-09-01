@@ -27,8 +27,8 @@ def set_keepawake(keep_screen_awake=False):
     keep_screen_awake: bool
         Currently unused as the screen will remain active as a byproduct of preventing sleep.
     """
-    subprocess.run([COMMAND, u"mask", *ARGS], stdout=subprocess.DEVNULL)
+    subprocess.run([COMMAND, u"mask", *ARGS], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def unset_keepawake():
-    subprocess.run([COMMAND, u"unmask", *ARGS], stdout=subprocess.DEVNULL)
+    subprocess.run([COMMAND, u"unmask", *ARGS], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
